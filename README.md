@@ -20,7 +20,7 @@ git clone pschatzmann/SAM.git
 
 ## Documentation
 
-- [class documentation for the Arduino API ](https://pschatzmann.github.io/SAM/doc/html/class_s_a_m.html) 
+- [class documentation for the Arduino API ](https://pschatzmann.github.io/arduino-SAM/doc/html/class_s_a_m.html) 
 - [supported Phonemes](PHONES.md) 
 - [the original Readme](SAM.md) 
 - [the manual of the equivalent Apple II program](http://www.apple-iigs.info/newdoc/sam.pdf)
