@@ -49,7 +49,7 @@ class SAM {
         }
 
         /// Constructor - for output to a stream
-        SAM(Stream &stream, bool as_text=false){
+        SAM(Print &stream, bool as_text=false){
             SAM_LOG("SAM Stream");
             if (as_text){
                 setOutput(new SAMPrintStream(stream));

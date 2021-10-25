@@ -244,7 +244,7 @@ class SAMOutputI2S : public  SAMOutputBase {
  */
 class SAMOutputStream : public  SAMOutputBase {
     public:
-        SAMOutputStream(Stream &out){
+        SAMOutputStream(Print &out){
             this->out_ptr = &out;
         }
         const char *name() {
@@ -252,14 +252,14 @@ class SAMOutputStream : public  SAMOutputBase {
         }
 
         virtual int drain(){
-            while(out_ptr->available()>0){
-                out_ptr->read();
-            }
+            // while(out_ptr->available()>0){
+            //     out_ptr->read();
+            // }
             return 0;
         }
 
         virtual int flush(){
-            out_ptr->flush();
+            //out_ptr->flush();
             return 0;
         };
 
@@ -273,12 +273,12 @@ class SAMOutputStream : public  SAMOutputBase {
                 SAM_LOG("Error - Could not write all data: %d of %d", len_written, len);
                 return false;
             }
-            out_ptr->flush();
+            //out_ptr->flush();
             return true;
         }
 
     protected:
-        Stream *out_ptr;   
+        Print *out_ptr;   
         int output_channels;    
 };
 
@@ -288,7 +288,7 @@ class SAMOutputStream : public  SAMOutputBase {
  */
 class SAMPrintStream : public  SAMOutputStream {
     public:
-        SAMPrintStream(Stream &out) : SAMOutputStream(out) {
+        SAMPrintStream(Print &out) : SAMOutputStream(out) {
         }
 
         const char *name() {
