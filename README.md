@@ -25,6 +25,7 @@ git clone pschatzmann/SAM.git
 - [the original Readme](SAM.md) 
 - [the manual of the equivalent Apple II program](http://www.apple-iigs.info/newdoc/sam.pdf)
 
+
 ## Voices
 
 Voices can be defined by setting the speed, pitch, throat and moth parameters:
