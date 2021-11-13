@@ -9,8 +9,8 @@ void setup(){
 
 
 void loop(){
-    const char* hallo ="hallo";
-    Serial.println(hallo);
-    sam.say(hallo);
-    delay(1000);
+    sam.say("Can you hear me now?");
+    delay(500);
+    sam.say("I can't hear you!");
+    delay(2000);
 }

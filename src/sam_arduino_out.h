@@ -217,6 +217,11 @@ class SAMOutputI2S : public  SAMOutputBase {
             if (ch!=2) SAM_LOG("Channels is not supported for this output type");
         }
 
+        void setBitsPerSample(int bps) {
+            if (bps!=16) SAM_LOG("Channels is not supported for this output type");
+        }
+
+
     protected:
         i2s_port_t i2s_num;  
         i2s_config_t i2s_config;
