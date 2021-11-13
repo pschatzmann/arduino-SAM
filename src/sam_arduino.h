@@ -184,9 +184,10 @@ class SAM {
         /// Defines the number of output channels  (default 1)
         void setOutputChannels(int channel_count){
             SAM_LOG("setOutputChannels: %d", channel_count);
-            if (channel_count > 0 && arduino_output->channels()==-1){
+            if (channel_count > 0){
                 // fixed channels are not enforced
                 this->channel_count = channel_count;
+                arduino_output->setChannels(channel_count);
             } else {
                 SAM_LOG("Channels is not supported for this output type");
             }

@@ -24,7 +24,7 @@ typedef void (*sam_callback)(size_t size, void *values);
 
 // Application Callback
 static void OutputByteCallback(void *cbdata, unsigned char b);
-
+static int SAM_sample_rate = 44100;
 /**
  * @brief Base Output Class with common functionality
  * 
@@ -56,6 +56,10 @@ class SAMOutputBase {
             return channel_count;
         }
 
+        virtual void setChannels(int channels){
+            channel_count = channels;
+        }
+
         virtual int bitsPerSample() {
             return bits_per_sample;
         }
@@ -65,7 +69,11 @@ class SAMOutputBase {
         }
 
         static int sampleRate() {
-            return 22050;
+            return SAM_sample_rate; // 44100;
+        }
+
+        static int setSampleRate(int rate) {
+            SAM_sample_rate = rate; // 44100;
         }
 
         void setBitsPerSample(int bps) {
@@ -80,6 +88,7 @@ class SAMOutputBase {
         bool is_open = false;
         int channel_count = -1;
         int bits_per_sample = -1;
+
 };
 
 /**
@@ -204,6 +213,10 @@ class SAMOutputI2S : public  SAMOutputBase {
             return true;;
         }
 
+        void setChannels(int ch){
+            if (ch!=2) SAM_LOG("Channels is not supported for this output type");
+        }
+
     protected:
         i2s_port_t i2s_num;  
         i2s_config_t i2s_config;
@@ -252,14 +265,10 @@ class SAMOutputStream : public  SAMOutputBase {
         }
 
         virtual int drain(){
-            // while(out_ptr->available()>0){
-            //     out_ptr->read();
-            // }
             return 0;
         }
 
         virtual int flush(){
-            //out_ptr->flush();
             return 0;
         };
 
@@ -300,7 +309,13 @@ class SAMPrintStream : public  SAMOutputStream {
                 case 8:
                     // copy from 1 to 2 channels
                     for (int j=0;j<bytes_count;j++){
-                        out_ptr->println(buffer[j]);
+                        out_ptr->print(buffer[j]);
+                        if (j<channels()-1){
+                            out_ptr->print(",");
+                        }
+                        if (j==channels()-1){
+                            out_ptr->println();
+                        }
                     }
                     break;
 
@@ -308,7 +323,13 @@ class SAMPrintStream : public  SAMOutputStream {
                     // copy from 1 to 2 channels
                     int16_t *buffer16 = (int16_t *) buffer;
                     for (int j=0;j<bytes_count/2;j++){
-                        out_ptr->println(buffer16[j]);
+                        out_ptr->print(buffer16[j]);
+                        if (j<channels()-1){
+                            out_ptr->print(",");
+                        }
+                        if (j==channels()-1){
+                            out_ptr->println();
+                        }
                     }
                     break;
                 
