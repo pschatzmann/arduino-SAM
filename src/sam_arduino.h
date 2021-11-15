@@ -240,7 +240,7 @@ class SAM {
         }
 
         // Writes the data to the output 
-        void write(unsigned char b) {            
+        void write(int8_t b) {            
             SAM_LOG("SAM::write bps:%d / channels:%d",bits_per_sample, channel_count);
             if (bits_per_sample==8){
                 int8_t sample[channel_count];
