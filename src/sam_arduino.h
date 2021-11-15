@@ -239,7 +239,7 @@ class SAM {
             SAM_LOG("-> bits_per_sample: %d",this->bits_per_sample);
         }
 
-        // Writes the data to the output 
+        /// Writes the data to the output. The data is provided as unsinged byte, so the values are between 0 and 256
         void write(uint8_t b) {            
             SAM_LOG("SAM::write bps:%d / channels:%d",bits_per_sample, channel_count);
             if (bits_per_sample==8){
