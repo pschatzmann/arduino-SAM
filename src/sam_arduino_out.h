@@ -113,10 +113,13 @@ class SAMOutputCallback : public  SAMOutputBase {
 };
 
 #ifdef ESP32
-#include "esp_arduino_version.h"
-
-#if !__has_include("esp_arduino_version.h") ||  ESP_IDF_VERSION_MAJOR < 4 
-#define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
+#if __has_include("esp_arduino_version.h")
+#  include "esp_arduino_version.h"
+#else
+#  define ESP_IDF_VERSION_MAJOR 2
+#endif
+#if ESP_IDF_VERSION_MAJOR < 4 
+#  define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
 #endif
 
 /**
