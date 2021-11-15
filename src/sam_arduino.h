@@ -302,7 +302,6 @@ class SAM {
 
             // close the processing
             SAM_LOG("SAM done!");
-            arduino_output->flush();
             arduino_output->close();
             return true;
         }

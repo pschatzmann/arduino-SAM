@@ -48,10 +48,6 @@ class SAMOutputBase {
             return 0;
         }
 
-        virtual int flush(){
-            return 0;
-        }
-
         virtual int channels() {
             return channel_count;
         }
@@ -280,11 +276,6 @@ class SAMOutputStream : public  SAMOutputBase {
             return 0;
         }
 
-        virtual int flush(){
-            return 0;
-        };
-
-
         virtual bool write(byte *buffer, int bytes_count) {
             SAM_LOG("SAMOutputStream::write: %d",  bytes_count);
             size_t len = bytes_count*sizeof(int16_t);
@@ -294,7 +285,6 @@ class SAMOutputStream : public  SAMOutputBase {
                 SAM_LOG("Error - Could not write all data: %d of %d", len_written, len);
                 return false;
             }
-            //out_ptr->flush();
             return true;
         }
 
