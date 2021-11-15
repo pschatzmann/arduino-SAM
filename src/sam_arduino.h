@@ -240,10 +240,10 @@ class SAM {
         }
 
         // Writes the data to the output 
-        void write(int8_t b) {            
+        void write(uint8_t b) {            
             SAM_LOG("SAM::write bps:%d / channels:%d",bits_per_sample, channel_count);
             if (bits_per_sample==8){
-                int8_t sample[channel_count];
+                uint8_t sample[channel_count];
                 for (int j=0;j<channel_count;j++){
                     sample[j] = b;
                 }
@@ -251,7 +251,10 @@ class SAM {
                 arduino_output->write((byte*)sample, channel_count);
             } else if (bits_per_sample==16) {
                 int16_t s16 = b;
-                s16 -= 128; s16 *= 128;
+                // convert to signed
+                s16 -= 128; 
+                // convert to int16
+                s16 *= 128;
                 int16_t sample[channel_count];
                 for (int j=0;j<channel_count; j++){
                     sample[j] = s16;
@@ -298,11 +301,13 @@ class SAM {
             SAMMain(outputByteCallback, (void*)this);
             SAM_LOG("SAMMain - done");
 
-            delete samdata;
-
             // close the processing
             SAM_LOG("SAM done!");
             arduino_output->close();
+
+            // Release SamData
+            delete samdata;
+
             return true;
         }
 };
