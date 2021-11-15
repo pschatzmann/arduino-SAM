@@ -224,8 +224,6 @@ class SAM {
 
         void setOutput(SAMOutputBase *out){
             SAM_LOG("setOutput");
-            // if (arduino_output!=nullptr)
-            //     delete arduino_output;
             arduino_output = out;    
 
             // force output definition as defined in arduino_output
@@ -240,8 +238,12 @@ class SAM {
         }
 
         /// Writes the data to the output. The data is provided as unsinged byte, so the values are between 0 and 256
-        void write(uint8_t b) {            
+        void write(uint8_t in) {            
             SAM_LOG("SAM::write bps:%d / channels:%d",bits_per_sample, channel_count);
+            // filter out noise
+            uint8_t b = filter(in);
+
+            // convert data
             if (bits_per_sample==8){
                 uint8_t sample[channel_count];
                 for (int j=0;j<channel_count;j++){
@@ -274,8 +276,7 @@ class SAM {
             if (samdata == nullptr){
                 // allocation failed!
                 return false;
-            }
-            
+            }            
             arduino_output->open();
 
             // Input massaging
@@ -309,6 +310,19 @@ class SAM {
             delete samdata;
 
             return true;
+        }
+
+        // filter oscillating noise 80 112
+        uint8_t filter(uint8_t b){
+            static bool filter_active = false;
+            bool last_filter_active = filter_active;
+
+            if (b==80 || b==112){
+                filter_active = true;
+            } else {
+                filter_active = false;
+            }
+            return last_filter_active && filter_active ? 128 : b;   
         }
 };
 

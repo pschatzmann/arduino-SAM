@@ -12,7 +12,7 @@ void setup(){
 
 
 void loop(){
-    const char* hallo ="hallo";
+    const char* hallo ="hallo my name is SAM";
     Serial.println(hallo);
     sam.say(hallo);
     
