@@ -24,7 +24,7 @@ typedef void (*sam_callback)(size_t size, void *values);
 
 // Application Callback
 static void OutputByteCallback(void *cbdata, unsigned char b);
-static int SAM_sample_rate = 44100;
+static uint32_t SAM_sample_rate = 44100;
 /**
  * @brief Base Output Class with common functionality
  * 
@@ -68,11 +68,11 @@ class SAMOutputBase {
             return is_open;
         }
 
-        static int sampleRate() {
+        static uint32_t sampleRate() {
             return SAM_sample_rate; // 44100;
         }
 
-        static int setSampleRate(int rate) {
+        static void setSampleRate(uint32_t rate) {
             SAM_sample_rate = rate; // 44100;
         }
 
@@ -117,6 +117,12 @@ class SAMOutputCallback : public  SAMOutputBase {
 };
 
 #ifdef ESP32
+#include "esp_arduino_version.h"
+
+#if ESP_IDF_VERSION_MAJOR < 4 
+#define I2S_COMM_FORMAT_STAND_I2S (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
+#endif
+
 /**
  * @brief Output to I2S for ESP32
  * 
@@ -234,11 +240,12 @@ class SAMOutputI2S : public  SAMOutputBase {
                 .sample_rate = this->sampleRate(),
                 .bits_per_sample = (i2s_bits_per_sample_t)16,
                 .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-                .communication_format = (i2s_comm_format_t) (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB),
-                .intr_alloc_flags = 0, // default interrupt priority
-                .dma_buf_count = 8,
+                .communication_format = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S,
+                .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1, // lowest interrupt priority
+                .dma_buf_count = 10,
                 .dma_buf_len = 64,
-                .use_apll = false
+                .use_apll = false,
+                .tx_desc_auto_clear = true // avoiding noise in case of data unavailability
             };
             this->i2s_config = i2s_config_default;
         }
