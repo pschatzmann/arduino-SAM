@@ -204,6 +204,11 @@ class SAM {
             }
         }
 
+        /// Enableds/disables the scaling to 16 bits - by default this is on
+        void setTrue16Bits(bool active){
+            true16Bins = active;
+        }
+
         /// Provides the sample rate (22050)
         static int sampleRate() {
             return SAMOutputBase::sampleRate();
@@ -213,6 +218,7 @@ class SAM {
         SAMOutputBase *arduino_output=nullptr;
         int bits_per_sample = 8;
         int channel_count = 1;
+        bool true16Bins = true;
 
         /// Used to feed the audio result back to this class 
         static void outputByteCallback(void *cbdata, unsigned char b) {
@@ -253,10 +259,12 @@ class SAM {
                 arduino_output->write((byte*)sample, channel_count);
             } else if (bits_per_sample==16) {
                 int16_t s16 = b;
-                // convert to signed
-                s16 -= 128; 
-                // convert to int16
-                s16 *= 128;
+                if (true16Bins) {
+                    // convert to signed
+                    s16 -= 128; 
+                    // convert to int16
+                    s16 *= 128;
+                }
                 int16_t sample[channel_count];
                 for (int j=0;j<channel_count; j++){
                     sample[j] = s16;
