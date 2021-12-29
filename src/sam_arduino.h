@@ -200,41 +200,29 @@ class SAM {
             }
         }
 
-        /// Defines the bits per sample (default 8)
-        void setOutputBitsPerSample(int bits_per_sample){
-            SAM_LOG("setOutputBitsPerSample: %d", bits_per_sample);
-            if ((bits_per_sample==8 || bits_per_sample==16) &&arduino_output->bitsPerSample()==-1){
-                this->bits_per_sample = bits_per_sample;
-                arduino_output->setBitsPerSample(bits_per_sample);
-            } else {
-                SAM_LOG("Bits Per Sample is not supported for this output type");
-            }
-        }
-
-        /// Enableds/disables the scaling to 16 bits - by default this is on
-        void setTrue16Bits(bool active){
-            true16Bits = active;
-        }
 
         /// Provides the sample rate (44100)
         static int sampleRate() {
             return SAMOutputBase::sampleRate();
         }
 
-
+        /// Provides the bits per sample
         int bitsPerSample() {
             return bits_per_sample;
         }
 
+        /// Provides the number of channels
         int channels() {
             return channel_count;
         }
 
     protected:
         SAMOutputBase *arduino_output=nullptr;
-        int bits_per_sample = 8;
+        int bits_per_sample = 16;
         int channel_count = 1;
-        bool true16Bits = true;
+        uint8_t audio[2];
+        int16_t *p_audio = (int16_t*)&audio;
+        uint8_t audio_byte = 0;
 
         /// Used to feed the audio result back to this class 
         static void outputByteCallback(void *cbdata, unsigned char b) {
@@ -248,51 +236,32 @@ class SAM {
             SAM_LOG("setOutput");
             arduino_output = out;    
 
-            // synchronize output definition with arduino_output
+            // synchronize channels definition with arduino_output: I2S must be 2 therefore we try to get it from arduino_output first
             if (arduino_output->channels()!=-1){
                 this->channel_count = arduino_output->channels();
             } else {
                 arduino_output->setChannels(channel_count);
             }
-            if (arduino_output->bitsPerSample()!=-1){
-                this->bits_per_sample = arduino_output->bitsPerSample();
-            } else {
-                arduino_output->setBitsPerSample(bits_per_sample);
-            }
             SAM_LOG("-> channel_count: %d",this->channel_count);
             SAM_LOG("-> bits_per_sample: %d",this->bits_per_sample);
         }
 
-        /// Writes the data to the output. The data is provided as unsinged byte, so the values are between 0 and 256
+        /// Writes the data to the output. The data is provided on 1 channel as unsinged byte of int16 values
         void write(uint8_t in) {            
             SAM_LOG("SAM::write bps:%d / channels:%d",bits_per_sample, channel_count);
-            // filter out noise
-            uint8_t b = filter(in);
+            audio[audio_byte++] = in;
 
-            // convert data
-            if (bits_per_sample==8){
-                uint8_t sample[channel_count];
-                for (int j=0;j<channel_count;j++){
-                    sample[j] = b;
-                }
-                SAM_LOG("writing to %s", arduino_output->name());
-                arduino_output->write((byte*)sample, channel_count);
-            } else if (bits_per_sample==16) {
-                int16_t s16 = b;
-                if (true16Bits) {
-                    // convert to signed
-                    s16 -= 128; 
-                    // convert to int16
-                    s16 *= 128;
-                }
+            if (audio_byte==2){
+                audio_byte = 0;
+                int16_t value = *p_audio;
+
+                // provide multiple channels if necessary
                 int16_t sample[channel_count];
-                for (int j=0;j<channel_count; j++){
-                    sample[j] = s16;
+                for (int j=0;j<channel_count;j++){
+                    sample[j] = value;
                 }
                 SAM_LOG("writing to %s", arduino_output->name());
                 arduino_output->write((byte*)sample, channel_count*2);
-            } else {
-                SAM_LOG("Error - invalid bits_per_sample");
             }
         }
 
@@ -338,19 +307,6 @@ class SAM {
             delete samdata;
 
             return true;
-        }
-
-        // filter oscillating noise 80 112
-        uint8_t filter(uint8_t b){
-            static bool filter_active = false;
-            bool last_filter_active = filter_active;
-
-            if (b==80 || b==112){
-                filter_active = true;
-            } else {
-                filter_active = false;
-            }
-            return last_filter_active && filter_active ? 128 : b;   
         }
 };
 

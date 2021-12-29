@@ -57,7 +57,7 @@ class SAMOutputBase {
         }
 
         virtual int bitsPerSample() {
-            return bits_per_sample;
+            return 16;
         }
 
         virtual bool isOpen() {
@@ -70,10 +70,6 @@ class SAMOutputBase {
 
         static void setSampleRate(uint32_t rate) {
             SAM_sample_rate = rate; // 44100;
-        }
-
-        void setBitsPerSample(int bps) {
-            bits_per_sample = bps;
         }
 
         virtual const char* name() = 0;
@@ -161,10 +157,6 @@ class SAMOutputI2S : public  SAMOutputBase {
 
         int channels() {
             return 2;
-        }
-
-        int bitsPerSample() {
-            return 16;
         }
 
         virtual void open() {
