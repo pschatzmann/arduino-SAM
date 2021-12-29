@@ -97,6 +97,15 @@ Voices</h1>
 <div class="line">SAM                   72        64        128       128</div>
 </div><!-- fragment --><p>You can try out some alternative parameter combinations <a href="https://discordier.github.io/sam/">here</a>.</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
+Output Format</h1>
+<p>The autput format is as follows:</p>
+<ul>
+<li>bits per sample: 16</li>
+<li>sample rate: 22050</li>
+<li>channels: 1</li>
+</ul>
+<p>You can change the channels to 2 by calling <code>sam.setOutputChannels(2);</code></p>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Memory Requirements</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -108,7 +117,7 @@ Memory Requirements</h1>
 </table>
 <p>The requirements have been determined by compiling the project with an ESP32. The values are rounded up! <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 License</h1>
 <p>The software is a reverse-engineered version of a commercial software published more than 30 years ago. The current copyright holder is SoftVoice, Inc. (www.text2speech.com)</p>
 <p>Any attempt to contact the company failed. The website was last updated in the year 2009. The status of the original software can therefore best described as Abandonware (<a href="http://en.wikipedia.org/wiki/Abandonware">http://en.wikipedia.org/wiki/Abandonware</a>)</p>

@@ -66,15 +66,15 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Software Automatic Mouth - Tiny Speech Synthesizer</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 What is SAM?</h1>
 <p>Sam is a very small Text-To-Speech (TTS) program written in C, that runs on most popular platforms. It is an adaption to C of the speech software <a class="el" href="class_s_a_m.html" title="Arduino API for SAM Text to Speach Engine.">SAM</a> (Software Automatic Mouth) for the Commodore C64 published in the year 1982 by Don't Ask Software (now SoftVoice, Inc.). It includes a Text-To-Phoneme converter called reciter and a Phoneme-To-Speech routine for the final output. It is so small that it will work also on embedded computers. On my computer it takes less than 39KB (much smaller on embedded devices as the executable-overhead is not necessary) of disk space and is a fully stand alone program. For immediate output it uses the SDL-library, otherwise it can save .wav files.</p>
 <p>An online version and executables for Windows can be found on the web site: <a href="http://simulationcorner.net/index.php?page=sam">http://simulationcorner.net/index.php?page=sam</a></p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Compile</h1>
 <p>Simply type "make" in your command prompt. In order to compile without SDL remove the SDL statements from the CFLAGS and LFLAGS variables in the file "Makefile".</p>
 <p>It should compile on every UNIX-like operating system. For Windows you need Cygwin or MinGW( + libsdl).</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Usage</h1>
 <p>type</p>
 <p>make for the first output.</p>
@@ -91,7 +91,7 @@ SAM                   72        64        128       128
 </pre><p>It can even sing look at the file "sing" for a small example.</p>
 <p>For the phoneme input table look in the Wiki.</p>
 <p>A description of additional features can be found in the original manual at <a href="http://www.retrobits.net/atari/sam.shtml">http://www.retrobits.net/atari/sam.shtml</a> or in the manual of the equivalent Apple II program <a href="http://www.apple-iigs.info/newdoc/sam.pdf">http://www.apple-iigs.info/newdoc/sam.pdf</a></p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Adaption To C</h1>
 <p>This program was converted semi-automatic into C by converting each assembler opcode. e. g. </p><pre class="fragment">lda 56      =&gt;  A = mem[56];
 jmp 38018   =&gt;  goto pos38018;
@@ -100,10 +100,10 @@ inc 38      =&gt;  mem[38]++;
 .           .
 </pre><p> Then it was manually rewritten to remove most of the jumps and register variables in the code and rename the variables to proper names. Most of the description below is a result of this rewriting process.</p>
 <p>Unfortunately its still a not very good readable. But you should see where I started :)</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Short description</h1>
 <p>First of all I will limit myself here to a very coarse description. There are very many exceptions defined in the source code that I will not explain. Also a lot of code is unknown for me e. g. Code47503. For a complete understanding of the code I need more time and especially more eyes have a look on the code.</p>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 Reciter</h2>
 <p>It changes the english text to phonemes by a ruleset shown in the wiki.</p>
 <p>The rule " ANT(I)", "AY", means that if he find an "I" with previous letters " ANT", exchange the I by the phoneme "AY".</p>
@@ -111,7 +111,7 @@ Reciter</h2>
 <li>: % which can mean e. g. that there must be a vocal or a consonant or something else.</li>
 </ul>
 <p>With the -debug option you will get the corresponding rules and the resulting phonemes.</p>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Output</h2>
 <p>Here is the full tree of subroutine calls:</p>
 <p>SAMMain() Parser1() Parser2() Insert() CopyStress() SetPhonemeLength() Code48619() Code41240() Insert() Code48431() Insert()</p>
@@ -122,7 +122,7 @@ Output</h2>
 <p>The wiki shows all possible phonemes and some flag fields. <br  />
  The final content of these tables can be seen with the -debug command.</p>
 <p>In the function PrepareOutput() these tables are partly copied into the small tables: phonemeindexOutput[] stressOutput[] phonemelengthOutput[] for output.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Final Output</h2>
 <p>Except of some special phonemes the output is build by a linear combination: </p><pre class="fragment">A =   A1 * sin ( f1 * t ) +
       A2 * sin ( f2 * t ) +
@@ -159,12 +159,12 @@ LSR A
 LSR A       
 STA 54296   ;SID   main output command
 </pre><p>The rest is handled in a special way. At the moment I cannot figure out in which way. But it seems that it uses some noise (e. g. for "s") using a table with random values.</p>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md15"></a>
 License</h1>
 <p>The software is a reverse-engineered version of a commercial software published more than 30 years ago. The current copyright holder is SoftVoice, Inc. (www.text2speech.com)</p>
 <p>Any attempt to contact the company failed. The website was last updated in the year 2009. The status of the original software can therefore best described as Abandonware (<a href="http://en.wikipedia.org/wiki/Abandonware">http://en.wikipedia.org/wiki/Abandonware</a>)</p>
 <p>As long this is the case I cannot put my code under any specific open source software license Use it at your own risk.</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Contact</h1>
 <p>If you have questions don' t hesitate to ask me. If you discovered some new knowledge about the code please mail me.</p>
 <p>Sebastian Macke Email: <a href="#" onclick="location.href='mai'+'lto:'+'seb'+'as'+'tia'+'n@'+'mac'+'ke'+'.de'; return false;">sebas<span style="display: none;">.nosp@m.</span>tian<span style="display: none;">.nosp@m.</span>@mack<span style="display: none;">.nosp@m.</span>e.de</a> </p>

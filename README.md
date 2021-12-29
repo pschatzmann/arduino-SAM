@@ -42,6 +42,15 @@ Voices can be defined by setting the speed, pitch, throat and moth parameters:
 
 You can try out some alternative parameter combinations [here](https://discordier.github.io/sam/).
 
+## Output Format
+
+The autput format is as follows:
+
+- bits per sample: 16
+- sample rate: 22050
+- channels: 1
+
+You can change the channels to 2 by calling ```sam.setOutputChannels(2);```
 
 ## Memory Requirements
 
