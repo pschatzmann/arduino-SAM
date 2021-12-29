@@ -60,6 +60,13 @@ class SAM {
         }
 
         /// Constructor - for output with a SAMOutputBase class
+        SAM(SAMOutputBase &out){
+            SAM_LOG("SAM SAMOutputBase");
+            setOutput(&out);
+            setVoice(Sam);
+        }
+
+        /// Constructor - for output with a SAMOutputBase class
         SAM(SAMOutputBase *out){
             SAM_LOG("SAM SAMOutputBase");
             setOutput(out);
@@ -209,9 +216,18 @@ class SAM {
             true16Bits = active;
         }
 
-        /// Provides the sample rate (22050)
+        /// Provides the sample rate (44100)
         static int sampleRate() {
             return SAMOutputBase::sampleRate();
+        }
+
+
+        int bitsPerSample() {
+            return bits_per_sample;
+        }
+
+        int channels() {
+            return channel_count;
         }
 
     protected:
@@ -232,12 +248,16 @@ class SAM {
             SAM_LOG("setOutput");
             arduino_output = out;    
 
-            // force output definition as defined in arduino_output
+            // synchronize output definition with arduino_output
             if (arduino_output->channels()!=-1){
                 this->channel_count = arduino_output->channels();
+            } else {
+                arduino_output->setChannels(channel_count);
             }
             if (arduino_output->bitsPerSample()!=-1){
                 this->bits_per_sample = arduino_output->bitsPerSample();
+            } else {
+                arduino_output->setBitsPerSample(bits_per_sample);
             }
             SAM_LOG("-> channel_count: %d",this->channel_count);
             SAM_LOG("-> bits_per_sample: %d",this->bits_per_sample);

@@ -24,7 +24,7 @@ typedef void (*sam_callback)(size_t size, void *values);
 
 // Application Callback
 static void OutputByteCallback(void *cbdata, unsigned char b);
-static uint32_t SAM_sample_rate = 44100;
+static uint32_t SAM_sample_rate = 22050;
 /**
  * @brief Base Output Class with common functionality
  * 
