@@ -108,6 +108,10 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#ac4b451e5894e8141f2943642cb4bd79b">SAM</a> (Print &amp;stream, bool as_text=false)</td></tr>
 <tr class="memdesc:ac4b451e5894e8141f2943642cb4bd79b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor - for output to a stream. <br /></td></tr>
 <tr class="separator:ac4b451e5894e8141f2943642cb4bd79b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ba8ad23a29fb90ac4549fc76bc79d73"><td class="memItemLeft" align="right" valign="top"><a id="a9ba8ad23a29fb90ac4549fc76bc79d73"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#a9ba8ad23a29fb90ac4549fc76bc79d73">SAM</a> (SAMOutputBase &amp;out)</td></tr>
+<tr class="memdesc:a9ba8ad23a29fb90ac4549fc76bc79d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor - for output with a SAMOutputBase class. <br /></td></tr>
+<tr class="separator:a9ba8ad23a29fb90ac4549fc76bc79d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac991209bf69ac96a10e083e40a327764"><td class="memItemLeft" align="right" valign="top"><a id="ac991209bf69ac96a10e083e40a327764"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#ac991209bf69ac96a10e083e40a327764">SAM</a> (SAMOutputBase *out)</td></tr>
 <tr class="memdesc:ac991209bf69ac96a10e083e40a327764"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor - for output with a SAMOutputBase class. <br /></td></tr>
@@ -159,16 +163,20 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#a29716ad3900f5443ccf67c789693e31d">setOutputChannels</a> (int channel_count)</td></tr>
 <tr class="memdesc:a29716ad3900f5443ccf67c789693e31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the number of output channels (default 1) <br /></td></tr>
 <tr class="separator:a29716ad3900f5443ccf67c789693e31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d055363b8ca9ebb0367aef5863b3410"><td class="memItemLeft" align="right" valign="top"><a id="a5d055363b8ca9ebb0367aef5863b3410"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#a5d055363b8ca9ebb0367aef5863b3410">setOutputBitsPerSample</a> (int bits_per_sample)</td></tr>
-<tr class="memdesc:a5d055363b8ca9ebb0367aef5863b3410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the bits per sample (default 8) <br /></td></tr>
-<tr class="separator:a5d055363b8ca9ebb0367aef5863b3410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5cf0c4c9c219f04ec31383dafcec6ac"><td class="memItemLeft" align="right" valign="top"><a id="af5cf0c4c9c219f04ec31383dafcec6ac"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#af5cf0c4c9c219f04ec31383dafcec6ac">bitsPerSample</a> ()</td></tr>
+<tr class="memdesc:af5cf0c4c9c219f04ec31383dafcec6ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the bits per sample. <br /></td></tr>
+<tr class="separator:af5cf0c4c9c219f04ec31383dafcec6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc101e2ec76814eb7f1ca9239a19cf2c"><td class="memItemLeft" align="right" valign="top"><a id="adc101e2ec76814eb7f1ca9239a19cf2c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#adc101e2ec76814eb7f1ca9239a19cf2c">channels</a> ()</td></tr>
+<tr class="memdesc:adc101e2ec76814eb7f1ca9239a19cf2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the number of channels. <br /></td></tr>
+<tr class="separator:adc101e2ec76814eb7f1ca9239a19cf2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aca811ebb9b52c34129bfa3f735e1cbd3"><td class="memItemLeft" align="right" valign="top"><a id="aca811ebb9b52c34129bfa3f735e1cbd3"></a>
 static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#aca811ebb9b52c34129bfa3f735e1cbd3">sampleRate</a> ()</td></tr>
-<tr class="memdesc:aca811ebb9b52c34129bfa3f735e1cbd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the sample rate (22050) <br /></td></tr>
+<tr class="memdesc:aca811ebb9b52c34129bfa3f735e1cbd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the sample rate (44100) <br /></td></tr>
 <tr class="separator:aca811ebb9b52c34129bfa3f735e1cbd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -176,9 +184,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a31c98d838b18cb2fe3104f8fe66cc0ed"><td class="memItemLeft" align="right" valign="top"><a id="a31c98d838b18cb2fe3104f8fe66cc0ed"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (SAMOutputBase *out)</td></tr>
 <tr class="separator:a31c98d838b18cb2fe3104f8fe66cc0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0be452f353f8c97e455087d38242bd94"><td class="memItemLeft" align="right" valign="top"><a id="a0be452f353f8c97e455087d38242bd94"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (unsigned char b)</td></tr>
-<tr class="separator:a0be452f353f8c97e455087d38242bd94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76afc8eb8c3bc0eec2ca8cdda14998b5"><td class="memItemLeft" align="right" valign="top"><a id="a76afc8eb8c3bc0eec2ca8cdda14998b5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">write</a> (uint8_t in)</td></tr>
+<tr class="memdesc:a76afc8eb8c3bc0eec2ca8cdda14998b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the data to the output. The data is provided on 1 channel as unsinged byte of int16 values. <br /></td></tr>
+<tr class="separator:a76afc8eb8c3bc0eec2ca8cdda14998b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1835fe1d3bc1154c04a0f6745e6b374"><td class="memItemLeft" align="right" valign="top"><a id="ad1835fe1d3bc1154c04a0f6745e6b374"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>textToSpeach</b> (const char *str, bool is_phonetic)</td></tr>
 <tr class="separator:ad1835fe1d3bc1154c04a0f6745e6b374"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,11 +205,20 @@ Protected Attributes</h2></td></tr>
 SAMOutputBase *&#160;</td><td class="memItemRight" valign="bottom"><b>arduino_output</b> =nullptr</td></tr>
 <tr class="separator:adfb21a79300ab427e3bf9dda71c61609"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e1a7058c48184bb5d7f6228946ae972"><td class="memItemLeft" align="right" valign="top"><a id="a1e1a7058c48184bb5d7f6228946ae972"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = 8</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>bits_per_sample</b> = 16</td></tr>
 <tr class="separator:a1e1a7058c48184bb5d7f6228946ae972"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0d09300928e6f0d6809a93a75a2d8cd"><td class="memItemLeft" align="right" valign="top"><a id="ae0d09300928e6f0d6809a93a75a2d8cd"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>channel_count</b> = 1</td></tr>
 <tr class="separator:ae0d09300928e6f0d6809a93a75a2d8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cb64ae3c0c891c9887b6a0939121832"><td class="memItemLeft" align="right" valign="top"><a id="a2cb64ae3c0c891c9887b6a0939121832"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>audio</b> [2]</td></tr>
+<tr class="separator:a2cb64ae3c0c891c9887b6a0939121832"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba6099076f2807d95346197ae8105dea"><td class="memItemLeft" align="right" valign="top"><a id="aba6099076f2807d95346197ae8105dea"></a>
+int16_t *&#160;</td><td class="memItemRight" valign="bottom"><b>p_audio</b> = (int16_t*)&amp;audio</td></tr>
+<tr class="separator:aba6099076f2807d95346197ae8105dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca72bc5a98c45e4f9fa4c3be5d43a623"><td class="memItemLeft" align="right" valign="top"><a id="aca72bc5a98c45e4f9fa4c3be5d43a623"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>audio_byte</b> = 0</td></tr>
+<tr class="separator:aca72bc5a98c45e4f9fa4c3be5d43a623"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Arduino API for <a class="el" href="class_s_a_m.html" title="Arduino API for SAM Text to Speach Engine.">SAM</a> Text to Speach Engine. </p>

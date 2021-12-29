@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['end_19',['end',['../class_s_a_m.html#abd8f41bb5cd03e234a4525f2cda7b2d7',1,'SAM']]]
+  ['bitspersample_21',['bitsPerSample',['../class_s_a_m.html#af5cf0c4c9c219f04ec31383dafcec6ac',1,'SAM']]]
 ];

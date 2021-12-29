@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['phonetic_20mode_3',['Phonetic Mode',['../md__p_h_o_n_e_s.html',1,'']]],
-  ['pitchedstr_4',['PitchedStr',['../struct_pitched_str.html',1,'']]]
+  ['getoutput_3',['getOutput',['../class_s_a_m.html#a761d1eae2bd009c3306cf92908a5314a',1,'SAM']]]
 ];
