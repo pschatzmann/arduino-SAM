@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "sam_config.h"
 
-char log_buffer[LOG_BUFFER_LEN] = {0};
+char log_buffer_sam[LOG_BUFFER_LEN] = {0};
 extern unsigned char signInputTable1[];
 extern unsigned char signInputTable2[];
 

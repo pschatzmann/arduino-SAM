@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 #define LOG_BUFFER_LEN 512
-extern char log_buffer[LOG_BUFFER_LEN];
+extern char log_buffer_sam[LOG_BUFFER_LEN];
 void printLog(char* msg);
 
 // activate/deactivate Logging
@@ -21,7 +21,7 @@ void printLog(char* msg);
 
 // generate LOG command only if SAM_LOG_ACTIVE 
 #if SAM_LOG_ACTIVE
-#define SAM_LOG(...)  { snprintf(log_buffer, LOG_BUFFER_LEN, __VA_ARGS__); printLog(log_buffer); }
+#define SAM_LOG(...)  { snprintf(log_buffer_sam, LOG_BUFFER_LEN, __VA_ARGS__); printLog(log_buffer_sam); }
 #else
 #define SAM_LOG(...)
 #endif
