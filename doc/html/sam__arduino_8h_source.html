@@ -124,7 +124,7 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <a class="code" href="class_s_a_m.html#a61caa881fa69bc7f283d45e8c50b1ca8">setVoice</a>(Sam);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#if defined(ESP32) &amp;&amp; LEGACY_ESP_I2S</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_s_a_m.html#a6a90bd65bbd8a28975e0537478e3ccde">   78</a></span>&#160;        <a class="code" href="class_s_a_m.html#a6a90bd65bbd8a28975e0537478e3ccde">SAM</a>(i2s_port_t i2s_num){</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAM i2s&quot;</span>);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            setOutput(<span class="keyword">new</span> SAMOutputI2S(i2s_num));</div>
