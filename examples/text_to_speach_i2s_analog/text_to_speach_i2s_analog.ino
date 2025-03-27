@@ -1,22 +1,19 @@
+#include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
 #include "sam_arduino.h"
 
-const i2s_config_t i2s_config = {
-    .mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN),
-    .sample_rate = 0, // dynamically determined
-    .bits_per_sample = (i2s_bits_per_sample_t)16,
-    .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-    .communication_format = (i2s_comm_format_t) (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB),
-    .intr_alloc_flags = 0, // default interrupt priority
-    .dma_buf_count = 8,
-    .dma_buf_len = 64,
-    .use_apll = false
-};
-
-SAM sam(new SAMOutputI2S(I2S_NUM_0, i2s_config));
+AnalogAudioStream out;
+SAM sam(out);
 
 void setup(){
-    Serial.begin(115700);
+    Serial.begin(115200);
+
     sam.setVoice(SAM::Sam);
+
+    auto cfg = out.defaultConfig();
+    cfg.sample_rate = 22050;
+    cfg.channels = 1;
+    cfg.bits_per_sample = 16;
+    out.begin(cfg);
 }
 
 

@@ -26,6 +26,7 @@ void printLog(char* msg);
 #define SAM_LOG(...)
 #endif
 
+#define LEGACY_ESP_I2S 0
 
 #ifdef __cplusplus
 }

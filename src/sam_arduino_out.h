@@ -108,7 +108,7 @@ class SAMOutputCallback : public  SAMOutputBase {
         sam_callback callback;
 };
 
-#ifdef ESP32
+#if defined(ESP32) && LEGACY_ESP_I2S
 #if  __has_include("esp_arduino_version.h")
 #  include "esp_arduino_version.h"
 #endif

@@ -1,10 +1,19 @@
+#include "AudioTools.h" // https://github.com/pschatzmann/arduino-audio-tools
 #include "sam_arduino.h"
 
-SAM sam(I2S_NUM_0);
+I2SStream out;
+SAM sam(out);
 
 void setup(){
-    Serial.begin(115700);
+    Serial.begin(115200);
+
     sam.setVoice(SAM::Sam);
+
+    auto cfg = out.defaultConfig();
+    cfg.sample_rate = 22050;
+    cfg.channels = 1;
+    cfg.bits_per_sample = 16;
+    out.begin(cfg);
 }
 
 

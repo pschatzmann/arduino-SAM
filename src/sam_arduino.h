@@ -73,7 +73,7 @@ class SAM {
             setVoice(Sam);
         }
 
-#ifdef ESP32
+#if defined(ESP32) && LEGACY_ESP_I2S
         /// Constructor - for output to I2S
         SAM(i2s_port_t i2s_num){
             SAM_LOG("SAM i2s");

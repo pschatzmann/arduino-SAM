@@ -226,7 +226,7 @@ const char *alice =
 "  So she set to work, and very soon finished off the cake. ";
 
 void setup(){
-    Serial.begin(115700);
+    Serial.begin(115200);
 }
 
 void loop(){

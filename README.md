@@ -8,7 +8,6 @@ I created this project with the intention to provide SAM as Arduino Library whic
 
 - [Output with a callback method](examples/text_to_speach_callback/text_to_speach_callback.ino)
 - [Output to a Arduino Stream](examples/text_to_speach_stream/text_to_speach_stream.ino)
-- [Output to I2S (for the ESP32)](examples/text_to_speach_i2s/text_to_speach_i2s.ino)
 
 ## Installation
 

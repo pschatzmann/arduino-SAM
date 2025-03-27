@@ -107,7 +107,7 @@ const PitchedStr song[] = {
 
 
 void setup(){
-    Serial.begin(115700);
+    Serial.begin(115200);
     sam.setSingMode(true);
 }
 

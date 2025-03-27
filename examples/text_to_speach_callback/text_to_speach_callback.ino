@@ -10,7 +10,7 @@ void callback(size_t len, void *data){
 SAM sam(callback);
 
 void setup(){
-    Serial.begin(115700);
+    Serial.begin(115200);
     sam.setVoice(SAM::Sam);
     sam.setOutputBitsPerSample(16);
     sam.setOutputChannels(1);
