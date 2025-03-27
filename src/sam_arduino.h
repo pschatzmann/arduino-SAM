@@ -74,7 +74,7 @@ class SAM {
         }
 
 #if defined(ESP32) && LEGACY_ESP_I2S
-        /// Constructor - for output to I2S
+        /// Deactivated: Legacy Constructor - for obsolete ESP32 I2S
         SAM(i2s_port_t i2s_num){
             SAM_LOG("SAM i2s");
             setOutput(new SAMOutputI2S(i2s_num));
