@@ -9,6 +9,7 @@ I created this project with the intention to provide SAM as Arduino Library whic
 - [Output with a callback method](examples/text_to_speach_callback/text_to_speach_callback.ino)
 - [Output to a Arduino Stream](examples/text_to_speach_stream/text_to_speach_stream.ino)
 
+
 ## Installation
 
 You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
