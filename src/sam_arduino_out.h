@@ -81,8 +81,8 @@ class SAMOutputCallback : public SAMOutputBase {
 
   virtual bool write(byte *buffer, int bytes_count) {
     SAM_LOG("SAMOutputCallback::write: %d", bytes_count);
-    int size = bytes_count;
-    callback(size, (int16_t *)buffer);
+    int samples = bytes_count / sizeof(int16_t);
+    callback(samples, (int16_t *)buffer);
     return true;
   }
 
