@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write_42',['write',['../class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5',1,'SAM']]]
+  ['write_44',['write',['../class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5',1,'SAM']]]
 ];

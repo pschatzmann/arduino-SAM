@@ -244,115 +244,117 @@ $(function() {
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            <span class="keywordflow">return</span> channel_count;</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        }</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <a class="code" href="class_s_a_m_output_base.html">SAMOutputBase</a> *arduino_output=<span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordtype">int</span> bits_per_sample = 16;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="keywordtype">int</span> channel_count = 1;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        uint8_t audio[2];</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        int16_t *p_audio = (int16_t*)&amp;audio;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        uint8_t audio_byte = 0;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
-<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="class_s_a_m.html#a58fe1a67bfa5317f66f2dfd10dd5aca2">  228</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_s_a_m.html#a58fe1a67bfa5317f66f2dfd10dd5aca2">outputByteCallback</a>(<span class="keywordtype">void</span> *cbdata, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> b) {</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;outputByteCallback: %d&quot;</span>, b);</div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="class_s_a_m.html#add6ad46a9ef66e8321594a9a62527f97">  220</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_s_a_m.html#add6ad46a9ef66e8321594a9a62527f97">setVolume</a>(uint8_t volPercent){</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            volume = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(volPercent) / 100.0;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keywordflow">if</span> (volPercent&gt; 100) volume = 1.0;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <a class="code" href="class_s_a_m_output_base.html">SAMOutputBase</a> *arduino_output=<span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keywordtype">int</span> bits_per_sample = 16;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="keywordtype">int</span> channel_count = 1;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keywordtype">float</span> volume = 1.0;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <a class="code" href="class_s_a_m.html">SAM</a> *sam = <span class="keyword">static_cast&lt;</span><a class="code" href="class_s_a_m.html">SAM</a>*<span class="keyword">&gt;</span>(cbdata);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            sam-&gt;<a class="code" href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">write</a>(b);</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        }</div>
+<div class="line"><a name="l00232"></a><span class="lineno"><a class="line" href="class_s_a_m.html#a58fe1a67bfa5317f66f2dfd10dd5aca2">  232</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_s_a_m.html#a58fe1a67bfa5317f66f2dfd10dd5aca2">outputByteCallback</a>(<span class="keywordtype">void</span> *cbdata, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> b) {</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;outputByteCallback: %d&quot;</span>, b);</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="keywordtype">void</span> setOutput(<a class="code" href="class_s_a_m_output_base.html">SAMOutputBase</a> *out){</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;setOutput&quot;</span>);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            arduino_output = out;    </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            <a class="code" href="class_s_a_m.html">SAM</a> *sam = <span class="keyword">static_cast&lt;</span><a class="code" href="class_s_a_m.html">SAM</a>*<span class="keyword">&gt;</span>(cbdata);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            sam-&gt;<a class="code" href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">write</a>(b);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        }</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            <span class="comment">// synchronize channels definition with arduino_output: I2S must be 2 therefore we try to get it from arduino_output first</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="keywordflow">if</span> (arduino_output-&gt;channels()!=-1){</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                this-&gt;channel_count = arduino_output-&gt;channels();</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                arduino_output-&gt;setChannels(channel_count);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            }</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;-&gt; channel_count: %d&quot;</span>,this-&gt;channel_count);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;-&gt; bits_per_sample: %d&quot;</span>,this-&gt;bits_per_sample);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        }</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno"><a class="line" href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">  250</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">write</a>(uint8_t in) {            </div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAM::write bps:%d / channels:%d&quot;</span>,bits_per_sample, channel_count);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            audio[audio_byte++] = in;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordflow">if</span> (audio_byte==2){</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                audio_byte = 0;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                int16_t value = *p_audio;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                <span class="comment">// provide multiple channels if necessary</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                int16_t sample[channel_count];</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0;j&lt;channel_count;j++){</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                    sample[j] = value;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                }</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                SAM_LOG(<span class="stringliteral">&quot;writing to %s&quot;</span>, arduino_output-&gt;name());</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                arduino_output-&gt;write((<span class="keywordtype">byte</span>*)sample, channel_count*2);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            }</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        }</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keywordtype">bool</span> textToSpeach(<span class="keyword">const</span> <span class="keywordtype">char</span> *str, <span class="keywordtype">bool</span> is_phonetic) {</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;textToSpeach: %s&quot;</span>,str);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;     </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">if</span> (!str || strlen(str)&gt;254) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Only can speak up to 1 page worth of data...</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            samdata = <span class="keyword">new</span> SamData();</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">if</span> (samdata == <span class="keyword">nullptr</span>){</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                <span class="comment">// allocation failed!</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            }            </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            arduino_output-&gt;open();</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="comment">// Input massaging</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="keywordtype">char</span> input[256];</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; str[i]; i++)</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                input[i] = toupper((<span class="keywordtype">int</span>)str[i]);</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            input[strlen(str)] = 0;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;input copied&quot;</span>);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            <span class="comment">// To phonemes</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            <span class="keywordflow">if</span> (is_phonetic) {</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                strncat(input, <span class="stringliteral">&quot;\x9b&quot;</span>, 255);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                SAM_LOG(<span class="stringliteral">&quot;TextToPhonemes&quot;</span>);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                strncat(input, <span class="stringliteral">&quot;[&quot;</span>, 255);</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                <span class="keywordflow">if</span> (!TextToPhonemes(input)) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// ERROR</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            }</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            <span class="comment">// Say it!</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SetInput: %s&quot;</span>, input);</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            SetInput(input);</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAMMain&quot;</span>);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            SAMMain(<a class="code" href="class_s_a_m.html#a58fe1a67bfa5317f66f2dfd10dd5aca2">outputByteCallback</a>, (<span class="keywordtype">void</span>*)<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAMMain - done&quot;</span>);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            <span class="comment">// close the processing</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAM done!&quot;</span>);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            arduino_output-&gt;close();</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            <span class="comment">// Release SamData</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            <span class="keyword">delete</span> samdata;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="keywordtype">void</span> setOutput(<a class="code" href="class_s_a_m_output_base.html">SAMOutputBase</a> *out){</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;setOutput&quot;</span>);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            arduino_output = out;    </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="comment">// synchronize channels definition with arduino_output: I2S must be 2 therefore we try to get it from arduino_output first</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <span class="keywordflow">if</span> (arduino_output-&gt;channels()!=-1){</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                this-&gt;channel_count = arduino_output-&gt;channels();</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                arduino_output-&gt;setChannels(channel_count);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;-&gt; channel_count: %d&quot;</span>,this-&gt;channel_count);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;-&gt; bits_per_sample: %d&quot;</span>,this-&gt;bits_per_sample);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00254"></a><span class="lineno"><a class="line" href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">  254</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">write</a>(uint8_t in) {            </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAM::write bps:%d / channels:%d&quot;</span>,bits_per_sample, channel_count);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            int16_t data[channel_count];</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            int16_t sample = in;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            <span class="comment">// convert unsinged 8 bit to signed 16 bits</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            sample -= 128; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            sample *= 128;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            <span class="comment">// apply volume </span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            sample = sample * volume;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="comment">// mono to stereo</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j&lt;channel_count; j++){</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                data[j] = sample;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            arduino_output-&gt;write((<span class="keywordtype">byte</span>*)data, <span class="keyword">sizeof</span>(data));</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="comment">// SAM_LOG(&quot;writing to %s&quot;, arduino_output-&gt;name());</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        }</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordtype">bool</span> textToSpeach(<span class="keyword">const</span> <span class="keywordtype">char</span> *str, <span class="keywordtype">bool</span> is_phonetic) {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;textToSpeach: %s&quot;</span>,str);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;     </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">if</span> (!str || strlen(str)&gt;254) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Only can speak up to 1 page worth of data...</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            samdata = <span class="keyword">new</span> SamData();</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordflow">if</span> (samdata == <span class="keyword">nullptr</span>){</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                <span class="comment">// allocation failed!</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            }            </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            arduino_output-&gt;open();</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            <span class="comment">// Input massaging</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            <span class="keywordtype">char</span> input[256];</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; str[i]; i++)</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                input[i] = toupper((<span class="keywordtype">int</span>)str[i]);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            input[strlen(str)] = 0;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;input copied&quot;</span>);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            <span class="comment">// To phonemes</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            <span class="keywordflow">if</span> (is_phonetic) {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                strncat(input, <span class="stringliteral">&quot;\x9b&quot;</span>, 255);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                SAM_LOG(<span class="stringliteral">&quot;TextToPhonemes&quot;</span>);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                strncat(input, <span class="stringliteral">&quot;[&quot;</span>, 255);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                <span class="keywordflow">if</span> (!TextToPhonemes(input)) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// ERROR</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            <span class="comment">// Say it!</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SetInput: %s&quot;</span>, input);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            SetInput(input);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAMMain&quot;</span>);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            SAMMain(<a class="code" href="class_s_a_m.html#a58fe1a67bfa5317f66f2dfd10dd5aca2">outputByteCallback</a>, (<span class="keywordtype">void</span>*)<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAMMain - done&quot;</span>);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            <span class="comment">// close the processing</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            SAM_LOG(<span class="stringliteral">&quot;SAM done!&quot;</span>);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            arduino_output-&gt;close();</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        }</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;};</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="keywordtype">void</span> printLog(<span class="keywordtype">char</span>* msg){</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    Serial.println(msg);</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;}</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="struct_pitched_str.html">  321</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_pitched_str.html">PitchedStr</a> {</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordtype">int</span> pitch;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordtype">char</span>* str;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;};</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            <span class="comment">// Release SamData</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            <span class="keyword">delete</span> samdata;</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;};</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="keywordtype">void</span> printLog(<span class="keywordtype">char</span>* msg){</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    Serial.println(msg);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno"><a class="line" href="struct_pitched_str.html">  324</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_pitched_str.html">PitchedStr</a> {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordtype">int</span> pitch;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordtype">char</span>* str;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;};</div>
 <div class="ttc" id="aclass_s_a_m_html"><div class="ttname"><a href="class_s_a_m.html">SAM</a></div><div class="ttdoc">Arduino API for SAM Text to Speach Engine.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:24</div></div>
 <div class="ttc" id="aclass_s_a_m_html_a14fc54f233862c3c339abcc16412078c"><div class="ttname"><a href="class_s_a_m.html#a14fc54f233862c3c339abcc16412078c">SAM::SAM</a></div><div class="ttdeci">SAM()</div><div class="ttdoc">Constructor - for text output to Serial.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:38</div></div>
 <div class="ttc" id="aclass_s_a_m_html_a29716ad3900f5443ccf67c789693e31d"><div class="ttname"><a href="class_s_a_m.html#a29716ad3900f5443ccf67c789693e31d">SAM::setOutputChannels</a></div><div class="ttdeci">void setOutputChannels(int channel_count)</div><div class="ttdoc">Defines the number of output channels (default 1)</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:192</div></div>
 <div class="ttc" id="aclass_s_a_m_html_a2e66c74e52081005cfbb7e5a4ab0e558"><div class="ttname"><a href="class_s_a_m.html#a2e66c74e52081005cfbb7e5a4ab0e558">SAM::~SAM</a></div><div class="ttdeci">~SAM()</div><div class="ttdoc">Destroy the SAM object.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:89</div></div>
-<div class="ttc" id="aclass_s_a_m_html_a58fe1a67bfa5317f66f2dfd10dd5aca2"><div class="ttname"><a href="class_s_a_m.html#a58fe1a67bfa5317f66f2dfd10dd5aca2">SAM::outputByteCallback</a></div><div class="ttdeci">static void outputByteCallback(void *cbdata, unsigned char b)</div><div class="ttdoc">Used to feed the audio result back to this class.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:228</div></div>
+<div class="ttc" id="aclass_s_a_m_html_a58fe1a67bfa5317f66f2dfd10dd5aca2"><div class="ttname"><a href="class_s_a_m.html#a58fe1a67bfa5317f66f2dfd10dd5aca2">SAM::outputByteCallback</a></div><div class="ttdeci">static void outputByteCallback(void *cbdata, unsigned char b)</div><div class="ttdoc">Used to feed the audio result back to this class.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:232</div></div>
 <div class="ttc" id="aclass_s_a_m_html_a61caa881fa69bc7f283d45e8c50b1ca8"><div class="ttname"><a href="class_s_a_m.html#a61caa881fa69bc7f283d45e8c50b1ca8">SAM::setVoice</a></div><div class="ttdeci">void setVoice(Voice voice)</div><div class="ttdoc">Set the Voice object DESCRIPTION SPEED PITCH THROAT MOUTH Elf 72 64 110 160 Little Robot 92 60 190 19...</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:124</div></div>
 <div class="ttc" id="aclass_s_a_m_html_a6a90bd65bbd8a28975e0537478e3ccde"><div class="ttname"><a href="class_s_a_m.html#a6a90bd65bbd8a28975e0537478e3ccde">SAM::SAM</a></div><div class="ttdeci">SAM(i2s_port_t i2s_num)</div><div class="ttdoc">Deactivated: Legacy Constructor - for obsolete ESP32 I2S.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:78</div></div>
 <div class="ttc" id="aclass_s_a_m_html_a761d1eae2bd009c3306cf92908a5314a"><div class="ttname"><a href="class_s_a_m.html#a761d1eae2bd009c3306cf92908a5314a">SAM::getOutput</a></div><div class="ttdeci">SAMOutputBase * getOutput()</div><div class="ttdoc">provides access to output information</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:179</div></div>
-<div class="ttc" id="aclass_s_a_m_html_a76afc8eb8c3bc0eec2ca8cdda14998b5"><div class="ttname"><a href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">SAM::write</a></div><div class="ttdeci">void write(uint8_t in)</div><div class="ttdoc">Writes the data to the output. The data is provided on 1 channel as unsinged byte of int16 values.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:250</div></div>
+<div class="ttc" id="aclass_s_a_m_html_a76afc8eb8c3bc0eec2ca8cdda14998b5"><div class="ttname"><a href="class_s_a_m.html#a76afc8eb8c3bc0eec2ca8cdda14998b5">SAM::write</a></div><div class="ttdeci">void write(uint8_t in)</div><div class="ttdoc">Writes the data to the output. The data is provided on 1 channel as unsinged byte of int16 values.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:254</div></div>
 <div class="ttc" id="aclass_s_a_m_html_a7bbf9c6ef1d3f13f1352c4332ab7ffde"><div class="ttname"><a href="class_s_a_m.html#a7bbf9c6ef1d3f13f1352c4332ab7ffde">SAM::say</a></div><div class="ttdeci">bool say(const char *text)</div><div class="ttdoc">Process text input.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:167</div></div>
 <div class="ttc" id="aclass_s_a_m_html_a9ba8ad23a29fb90ac4549fc76bc79d73"><div class="ttname"><a href="class_s_a_m.html#a9ba8ad23a29fb90ac4549fc76bc79d73">SAM::SAM</a></div><div class="ttdeci">SAM(SAMOutputBase &amp;out)</div><div class="ttdoc">Constructor - for output with a SAMOutputBase class.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:63</div></div>
 <div class="ttc" id="aclass_s_a_m_html_ab14c5fc6819aaa8829a16983ca0d9553"><div class="ttname"><a href="class_s_a_m.html#ab14c5fc6819aaa8829a16983ca0d9553">SAM::sayPhone</a></div><div class="ttdeci">bool sayPhone(const char *text)</div><div class="ttdoc">Process text input.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:173</div></div>
@@ -362,6 +364,7 @@ $(function() {
 <div class="ttc" id="aclass_s_a_m_html_ac991209bf69ac96a10e083e40a327764"><div class="ttname"><a href="class_s_a_m.html#ac991209bf69ac96a10e083e40a327764">SAM::SAM</a></div><div class="ttdeci">SAM(SAMOutputBase *out)</div><div class="ttdoc">Constructor - for output with a SAMOutputBase class.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:70</div></div>
 <div class="ttc" id="aclass_s_a_m_html_aca811ebb9b52c34129bfa3f735e1cbd3"><div class="ttname"><a href="class_s_a_m.html#aca811ebb9b52c34129bfa3f735e1cbd3">SAM::sampleRate</a></div><div class="ttdeci">static int sampleRate()</div><div class="ttdoc">Provides the sample rate (44100)</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:205</div></div>
 <div class="ttc" id="aclass_s_a_m_html_adc101e2ec76814eb7f1ca9239a19cf2c"><div class="ttname"><a href="class_s_a_m.html#adc101e2ec76814eb7f1ca9239a19cf2c">SAM::channels</a></div><div class="ttdeci">int channels()</div><div class="ttdoc">Provides the number of channels.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:215</div></div>
+<div class="ttc" id="aclass_s_a_m_html_add6ad46a9ef66e8321594a9a62527f97"><div class="ttname"><a href="class_s_a_m.html#add6ad46a9ef66e8321594a9a62527f97">SAM::setVolume</a></div><div class="ttdeci">void setVolume(uint8_t volPercent)</div><div class="ttdoc">set the Volume range 0-100;</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:220</div></div>
 <div class="ttc" id="aclass_s_a_m_html_aed7c08a4d197093d0a5c64847453d1da"><div class="ttname"><a href="class_s_a_m.html#aed7c08a4d197093d0a5c64847453d1da">SAM::Voice</a></div><div class="ttdeci">Voice</div><div class="ttdoc">SAM Voices.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:28</div></div>
 <div class="ttc" id="aclass_s_a_m_html_af5cf0c4c9c219f04ec31383dafcec6ac"><div class="ttname"><a href="class_s_a_m.html#af5cf0c4c9c219f04ec31383dafcec6ac">SAM::bitsPerSample</a></div><div class="ttdeci">int bitsPerSample()</div><div class="ttdoc">Provides the bits per sample.</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:210</div></div>
 <div class="ttc" id="aclass_s_a_m_output_base_html"><div class="ttname"><a href="class_s_a_m_output_base.html">SAMOutputBase</a></div><div class="ttdoc">Base Output Class with common functionality.</div><div class="ttdef"><b>Definition:</b> sam_arduino_out.h:32</div></div>
@@ -369,7 +372,7 @@ $(function() {
 <div class="ttc" id="aclass_s_a_m_output_i2_s_html"><div class="ttname"><a href="class_s_a_m_output_i2_s.html">SAMOutputI2S</a></div><div class="ttdoc">Output to I2S for ESP32: This class is obsolete and has been deactivated in the sam_config....</div><div class="ttdef"><b>Definition:</b> sam_arduino_out.h:116</div></div>
 <div class="ttc" id="aclass_s_a_m_output_stream_html"><div class="ttname"><a href="class_s_a_m_output_stream.html">SAMOutputStream</a></div><div class="ttdoc">Output to Arduino Stream.</div><div class="ttdef"><b>Definition:</b> sam_arduino_out.h:248</div></div>
 <div class="ttc" id="aclass_s_a_m_print_stream_html"><div class="ttname"><a href="class_s_a_m_print_stream.html">SAMPrintStream</a></div><div class="ttdoc">Write readable string to Arduino Stream.</div><div class="ttdef"><b>Definition:</b> sam_arduino_out.h:276</div></div>
-<div class="ttc" id="astruct_pitched_str_html"><div class="ttname"><a href="struct_pitched_str.html">PitchedStr</a></div><div class="ttdoc">string and pitch - this can be used to build a song</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:321</div></div>
+<div class="ttc" id="astruct_pitched_str_html"><div class="ttname"><a href="struct_pitched_str.html">PitchedStr</a></div><div class="ttdoc">string and pitch - this can be used to build a song</div><div class="ttdef"><b>Definition:</b> sam_arduino.h:324</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

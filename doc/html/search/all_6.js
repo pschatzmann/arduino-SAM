@@ -12,5 +12,6 @@ var searchData=
   ['say_16',['say',['../class_s_a_m.html#a7bbf9c6ef1d3f13f1352c4332ab7ffde',1,'SAM']]],
   ['sayphone_17',['sayPhone',['../class_s_a_m.html#ab14c5fc6819aaa8829a16983ca0d9553',1,'SAM']]],
   ['setoutputchannels_18',['setOutputChannels',['../class_s_a_m.html#a29716ad3900f5443ccf67c789693e31d',1,'SAM']]],
-  ['setvoice_19',['setVoice',['../class_s_a_m.html#a61caa881fa69bc7f283d45e8c50b1ca8',1,'SAM']]]
+  ['setvoice_19',['setVoice',['../class_s_a_m.html#a61caa881fa69bc7f283d45e8c50b1ca8',1,'SAM']]],
+  ['setvolume_20',['setVolume',['../class_s_a_m.html#add6ad46a9ef66e8321594a9a62527f97',1,'SAM']]]
 ];
