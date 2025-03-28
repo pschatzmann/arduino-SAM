@@ -14,7 +14,7 @@
 #include "sam.h"
 #include "sam_config.h"
 
-#ifdef ESP32
+#if defined(ESP32) && LEGACY_ESP_I2S
 #include "driver/i2s.h"
 #include "freertos/queue.h"
 #endif
@@ -254,7 +254,7 @@ class SAMOutputStream : public SAMOutputBase {
 
   virtual bool write(byte *buffer, int bytes_count) {
     SAM_LOG("SAMOutputStream::write: %d", bytes_count);
-    size_t len = bytes_count * sizeof(int16_t);
+    size_t len = bytes_count;
 
     size_t len_written = out_ptr->write((const uint8_t *)buffer, len);
     if (len != len_written) {

@@ -216,13 +216,17 @@ class SAM {
             return channel_count;
         }
 
+        /// set the Volume range 0-100;
+        void setVolume(uint8_t volPercent){
+            volume = static_cast<float>(volPercent) / 100.0;
+            if (volPercent> 100) volume = 1.0;
+        }
+
     protected:
         SAMOutputBase *arduino_output=nullptr;
         int bits_per_sample = 16;
         int channel_count = 1;
-        uint8_t audio[2];
-        int16_t *p_audio = (int16_t*)&audio;
-        uint8_t audio_byte = 0;
+        float volume = 1.0;
 
         /// Used to feed the audio result back to this class 
         static void outputByteCallback(void *cbdata, unsigned char b) {
@@ -249,20 +253,19 @@ class SAM {
         /// Writes the data to the output. The data is provided on 1 channel as unsinged byte of int16 values
         void write(uint8_t in) {            
             SAM_LOG("SAM::write bps:%d / channels:%d",bits_per_sample, channel_count);
-            audio[audio_byte++] = in;
-
-            if (audio_byte==2){
-                audio_byte = 0;
-                int16_t value = *p_audio;
-
-                // provide multiple channels if necessary
-                int16_t sample[channel_count];
-                for (int j=0;j<channel_count;j++){
-                    sample[j] = value;
-                }
-                SAM_LOG("writing to %s", arduino_output->name());
-                arduino_output->write((byte*)sample, channel_count*2);
+            int16_t data[channel_count];
+            int16_t sample = in;
+            // convert unsinged 8 bit to signed 16 bits
+            sample -= 128; 
+            sample *= 128;
+            // apply volume 
+            sample = sample * volume;
+            // mono to stereo
+            for (int j = 0; j<channel_count; j++){
+                data[j] = sample;
             }
+            arduino_output->write((byte*)data, sizeof(data));
+            // SAM_LOG("writing to %s", arduino_output->name());
         }
 
         bool textToSpeach(const char *str, bool is_phonetic) {
