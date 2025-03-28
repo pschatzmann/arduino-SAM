@@ -6,7 +6,6 @@ SAM sam(Serial,true);
 void setup(){
     Serial.begin(115200);
     sam.setVoice(SAM::Sam);
-    sam.setOutputBitsPerSample(8);
     sam.setOutputChannels(1);
 }
 

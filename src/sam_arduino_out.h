@@ -20,7 +20,7 @@
 #endif
 
 // User Callback
-typedef void (*sam_callback)(size_t size, void *values);
+typedef void (*sam_callback)(size_t size, int16_t *values);
 
 // Application Callback
 static void OutputByteCallback(void *cbdata, unsigned char b);
@@ -82,7 +82,7 @@ class SAMOutputCallback : public SAMOutputBase {
   virtual bool write(byte *buffer, int bytes_count) {
     SAM_LOG("SAMOutputCallback::write: %d", bytes_count);
     int size = bytes_count;
-    callback(size, (int8_t *)buffer);
+    callback(size, (int16_t *)buffer);
     return true;
   }
 
@@ -190,7 +190,7 @@ class SAMOutputI2S : public SAMOutputBase {
       }
     }
 
-    if (i2s_write(i2s_num, buffer, bytes_count * sizeof(int16_t),
+    if (i2s_write(i2s_num, buffer, bytes_count,
                   &i2s_bytes_write, portMAX_DELAY) != ESP_OK) {
       ESP_LOGE(TAG, "i2s_write failed!");
       return false;
@@ -280,33 +280,16 @@ class SAMPrintStream : public SAMOutputStream {
   const char *name() { return "SAMPrintStream"; }
 
   virtual bool write(byte *buffer, int bytes_count) {
-    switch (bitsPerSample()) {
-      case 8:
-        // copy from 1 to 2 channels
-        for (int j = 0; j < bytes_count; j++) {
-          out_ptr->print(buffer[j]);
-          if (j < channels() - 1) {
-            out_ptr->print(",");
-          }
-          if (j == channels() - 1) {
-            out_ptr->println();
-          }
-        }
-        break;
-
-      case 16:
-        // copy from 1 to 2 channels
-        int16_t *buffer16 = (int16_t *)buffer;
-        for (int j = 0; j < bytes_count / 2; j++) {
-          out_ptr->print(buffer16[j]);
-          if (j < channels() - 1) {
-            out_ptr->print(",");
-          }
-          if (j == channels() - 1) {
-            out_ptr->println();
-          }
-        }
-        break;
+    // copy from 1 to 2 channels
+    int16_t *buffer16 = (int16_t *)buffer;
+    for (int j = 0; j < bytes_count / 2; j++) {
+      out_ptr->print(buffer16[j]);
+      if (j < channels() - 1) {
+        out_ptr->print(",");
+      }
+      if (j == channels() - 1) {
+        out_ptr->println();
+      }
     }
 
     return true;
