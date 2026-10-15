@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['getoutput_3',['getOutput',['../class_s_a_m.html#a761d1eae2bd009c3306cf92908a5314a',1,'SAM']]]
+  ['description_0',['Short description',['../md__s_a_m.html#autotoc_md11',1,'']]],
+  ['documentation_1',['Documentation',['../index.html#autotoc_md2',1,'']]]
 ];

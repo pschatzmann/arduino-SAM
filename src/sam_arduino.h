@@ -18,7 +18,7 @@
 
 
 /**
- * @brief Arduino API for SAM Text to Speach Engine
+ * @brief Arduino API for SAM Text to Speech Engine
  * 
  */
 class SAM {
@@ -166,13 +166,13 @@ class SAM {
         /// Process text input
         bool say(const char* text){
             SAM_LOG("say: %s",text);
-            return textToSpeach(text, false);
+            return textToSpeech(text, false);
         }
 
         /// Process text input
         bool sayPhone(const char* text){
             SAM_LOG("sayPhone: %s",text);
-            return textToSpeach(text, true);
+            return textToSpeech(text, true);
         }
 
         /// provides access to output information
@@ -268,8 +268,8 @@ class SAM {
             // SAM_LOG("writing to %s", arduino_output->name());
         }
 
-        bool textToSpeach(const char *str, bool is_phonetic) {
-            SAM_LOG("textToSpeach: %s",str);
+        bool textToSpeech(const char *str, bool is_phonetic) {
+            SAM_LOG("textToSpeech: %s",str);
      
             if (!str || strlen(str)>254) return false; // Only can speak up to 1 page worth of data...
             samdata = new SamData();

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['phonetic_20mode_5',['Phonetic Mode',['../md__p_h_o_n_e_s.html',1,'']]],
-  ['pitchedstr_6',['PitchedStr',['../struct_pitched_str.html',1,'']]]
+  ['final_20output_0',['Final Output',['../md__s_a_m.html#autotoc_md14',1,'']]],
+  ['format_1',['Output Format',['../index.html#autotoc_md4',1,'']]]
 ];

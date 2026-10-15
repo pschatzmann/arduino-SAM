@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['voice_21',['Voice',['../class_s_a_m.html#aed7c08a4d197093d0a5c64847453d1da',1,'SAM']]]
+  ['installation_0',['Installation',['../index.html#autotoc_md1',1,'']]],
+  ['is_20sam_1',['What is SAM?',['../md__s_a_m.html#autotoc_md7',1,'']]]
 ];

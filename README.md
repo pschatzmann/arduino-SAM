@@ -6,8 +6,8 @@ in the year 1982 by Don't Ask Software (now SoftVoice, Inc.). It includes a Text
 
 I created this project with the intention to provide SAM as Arduino Library which supports different output alternatives:
 
-- [Output with a callback method](examples/text_to_speach_callback/text_to_speach_callback.ino)
-- [Output to a Arduino Stream](examples/text_to_speach_stream/text_to_speach_stream.ino)
+- [Output with a callback method](examples/text_to_speech_callback/text_to_speech_callback.ino)
+- [Output to a Arduino Stream](examples/text_to_speech_stream/text_to_speech_stream.ino)
 
 
 ## Installation

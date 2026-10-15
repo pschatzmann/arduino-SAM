@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['_7esam_23',['~SAM',['../class_s_a_m.html#a2e66c74e52081005cfbb7e5a4ab0e558',1,'SAM']]]
+  ['memory_20requirements_0',['Memory Requirements',['../index.html#autotoc_md5',1,'']]],
+  ['mode_1',['Phonetic Mode',['../md__p_h_o_n_e_s.html',1,'']]],
+  ['mouth_20tiny_20speech_20synthesizer_20arduino_20library_2',['SAM - Software Automatic Mouth - Tiny Speech Synthesizer - Arduino Library',['../index.html',1,'']]]
 ];
